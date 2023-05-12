@@ -1,0 +1,66 @@
+<!-- Liquid in product file -->
+{% assign sandboards = collections.all.products %}
+{% if sandboards.size > 1 %}
+  <div class="dropdown">
+    <button
+      class="btn dropdown-toggle"
+      type="button"
+      id="collectionDropdown"
+      data-toggle="dropdown"
+      aria-haspopup="true"
+      aria-expanded="false">
+      Other Sandboard Options
+    </button>
+    <div class="dropdown-menu" aria-labelledby="collectionDropdown">
+      {% for prod in sandboards %}
+        {% if prod.tags contains "Sandboarding" %}
+          <a class="dropdown-item" href="{{ prod.url }}">{{ prod.title }}</a>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+{% endif %}
+
+<script>
+  // javascript
+// Get the dropdown button and menu elements
+  const dropdownButton = document.querySelector('.dropdown-toggle');
+  const dropdownMenu = document.querySelector('.dropdown-menu');
+
+// Close the dropdown menu if the user clicks outside of it
+  document.addEventListener('click', function(event) {
+    if (! event.target.closest('.dropdown')) {
+      dropdownMenu.classList.remove('show');
+    }
+  });
+
+// Show the dropdown menu when the button is clicked
+  dropdownButton.addEventListener('click', function() {
+    dropdownMenu.classList.toggle('show');
+  });
+</script>
+
+/* CSS */
+{%- style -%}
+  .dropdown-menu {
+    display: none;
+    background-color: #ffffff;
+    border: 1px solid #dddddd;
+    box-shadow: none;
+    padding: 0;
+    margin: 0;
+  }
+  .dropdown-item {
+    display: block;
+    padding: 8px 16px;
+    color: #333333;
+    font-size: 16px;
+    text-decoration: none;
+    border-bottom: 1px solid #777;
+  }
+
+  /* Show the dropdown menu when the button is clicked */
+  .show {
+    display: block;
+  }
+{%- endstyle -%}
